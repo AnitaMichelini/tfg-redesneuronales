@@ -1,0 +1,53 @@
+.game-container {
+  text-align: center;
+  margin-top: 50px;
+}
+
+.game-board {
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: 20px;
+}
+
+.drop-zones {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 300px;
+}
+
+.drop-zone {
+  width: 100px;
+  height: 100px;
+  margin: 5px;
+  border: 2px dashed #888;
+  position: relative;
+}
+
+.drop-zone.has-piece {
+  background-color: lightgreen;
+}
+
+.puzzle-pieces {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 300px;
+}
+
+.draggable-piece {
+  width: 100px;
+  height: 100px;
+  margin: 5px;
+  cursor: pointer;
+  background-size: cover;
+  border: 2px solid #ccc;
+}
+
+.restart-button {
+  margin-top: 20px;
+}
+
+.tutorial-button {
+  margin-top: 20px;
+}

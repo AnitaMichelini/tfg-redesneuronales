@@ -10,7 +10,8 @@ import Register from './Register';
 import Home from './Home';
 import Navbar from './Navbar';
 import Game from './game';
-import PuzzleGame from './puzzleGame';  
+import PuzzleGame from './puzzleGame';
+import VideosNinos from './videosNiños';  
 
 function App() {
   return (
@@ -27,7 +28,7 @@ function App() {
                 <Route path='/Register' element={<Register />} /> {/*Ruta de registro*/}
                 <Route path="/Game" element={<Game />} /> {/* Ruta para el juego */}
                 <Route path="/PuzzleGame" element={<PuzzleGame />} />
-                {/*Agregar las rutas que necesito*/}
+                <Route path='/VideosNiños' element={<VideosNinos />} /> {/*Ruta de login*/}
               </Routes> 
             </div>
         </header>

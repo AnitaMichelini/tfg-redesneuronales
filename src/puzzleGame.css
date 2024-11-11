@@ -1,0 +1,14 @@
+.puzzle-piece.dragging {
+    opacity: 0.5;
+    cursor: move;
+  }
+  
+  .drop-zone {
+    border: 2px dashed #bbb;
+    background-color: #f5f5f5;
+  }
+  
+  .completed-piece {
+    background-color: transparent;
+  }
+  

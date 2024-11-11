@@ -1,90 +1,148 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // Para navegación
-import PuzzleGame from './puzzleGame'; // Importamos el componente del rompecabezas
-import { useDrag, useDrop } from 'react-dnd'; // Importamos React DnD
+import { useNavigate } from 'react-router-dom';
+import './game.css';
 
 const Game = () => {
   const [isGameOver, setIsGameOver] = useState(false);
-  const navigate = useNavigate(); // Usamos navigate para ir a otra página, si es necesario
+  const [puzzlePieces, setPuzzlePieces] = useState([]);
+  const [dropZones, setDropZones] = useState([]);
+  const navigate = useNavigate();
 
-  // Función para manejar la finalización del juego
-  const handleGameOver = () => {
-    setIsGameOver(true);
+  // Crear las piezas del rompecabezas
+  const generatePuzzlePieces = () => {
+    const pieces = [];
+    for (let i = 0; i < 9; i++) {
+      pieces.push({
+        id: i,
+        image: `images/piece-${i}.jpg`,
+        position: i,
+        isCorrect: false,
+      });
+    }
+    setPuzzlePieces(shuffleArray(pieces));
+    setDropZones(new Array(9).fill(null));
   };
 
-  // Función para reiniciar el juego
+  // Función para barajar las piezas
+  const shuffleArray = (array) => {
+    return array.sort(() => Math.random() - 0.5);
+  };
+
+  // Verificar si el rompecabezas está armado correctamente
+  const isPuzzleComplete = () => {
+    return puzzlePieces.every((piece, index) => piece.isCorrect);
+  };
+
+  // Manejar cuando el rompecabezas se completa
+  const handleGameOver = () => {
+    if (isPuzzleComplete()) {
+      setIsGameOver(true);
+    }
+  };
+
+  // Reiniciar el juego
   const restartGame = () => {
     setIsGameOver(false);
+    generatePuzzlePieces();
   };
 
-  // Componente de arrastrar y soltar
-  const DraggableItem = () => {
-    const [{ isDragging }, drag] = useDrag(() => ({
-      type: 'ITEM',
-      item: { id: 1 },
-      collect: (monitor) => ({
-        isDragging: monitor.isDragging(),
-      }),
-    }));
+  // Manejar el drop de una pieza
+  const handleDrop = (pieceIndex, dropZoneIndex) => {
+    const newPuzzlePieces = [...puzzlePieces];
+    newPuzzlePieces[pieceIndex].isCorrect = dropZoneIndex === pieceIndex;
+
+    setPuzzlePieces(newPuzzlePieces);
+
+    // Actualizar las zonas de drop
+    const newDropZones = [...dropZones];
+    newDropZones[dropZoneIndex] = newPuzzlePieces[pieceIndex];
+
+    setDropZones(newDropZones);
+    handleGameOver();
+  };
+
+  // Componente de pieza del rompecabezas
+  const DraggableItem = ({ piece, index }) => {
+    return (
+      <div
+        className="draggable-piece"
+        style={{ backgroundImage: `url(${piece.image})` }}
+        draggable
+        onDragEnd={() => {}}
+        onDragStart={(e) => e.dataTransfer.setData('pieceIndex', index)}
+      />
+    );
+  };
+
+  // Componente de casillero de drop
+  const DropZone = ({ index, piece, handleDrop }) => {
+    const handleDragOver = (e) => {
+      e.preventDefault();
+    };
+
+    const handleDropEvent = (e) => {
+      e.preventDefault();
+      const pieceIndex = e.dataTransfer.getData('pieceIndex');
+      handleDrop(Number(pieceIndex), index);
+    };
 
     return (
       <div
-        ref={drag}
-        style={{
-          opacity: isDragging ? 0.5 : 1,
-          padding: '10px',
-          backgroundColor: 'lightblue',
-          border: '1px solid black',
-        }}
+        className={`drop-zone ${piece ? 'has-piece' : ''}`}
+        onDragOver={handleDragOver}
+        onDrop={handleDropEvent}
       >
-        Arrastra este item
+        {piece && (
+          <img
+            src={piece.image}
+            alt={`Pieza ${piece.id}`}
+            style={{ width: '100px', height: '100px' }}
+          />
+        )}
       </div>
     );
   };
 
-  const DropZone = () => {
-    const [, drop] = useDrop(() => ({
-      accept: 'ITEM',
-      drop: (item) => console.log(item),
-    }));
-
-    return (
-      <div
-        ref={drop}
-        style={{
-          border: '2px dashed #888',
-          padding: '20px',
-          marginTop: '20px',
-          backgroundColor: '#f9f9f9',
-        }}
-      >
-        Soltar aquí
-      </div>
-    );
-  };
+  // Inicializar el juego al cargar
+  React.useEffect(() => {
+    generatePuzzlePieces();
+  }, []);
 
   return (
-    <div style={{ textAlign: 'center', marginTop: '50px' }}>
+    <div className="game-container">
       <h2>¡Bienvenido al Juego de Rompecabezas!</h2>
-      
-      {/* Mostrar el juego si no ha terminado */}
+
       {!isGameOver ? (
         <>
-          <PuzzleGame onGameOver={handleGameOver} /> {/* Pasamos la función para finalizar el juego */}
+          <div className="game-board">
+            <div className="drop-zones">
+              {dropZones.map((piece, index) => (
+                <DropZone
+                  key={index}
+                  index={index}
+                  piece={piece}
+                  handleDrop={handleDrop}
+                />
+              ))}
+            </div>
+            <div className="puzzle-pieces">
+              {puzzlePieces.map((piece, index) => (
+                <DraggableItem key={index} piece={piece} index={index} />
+              ))}
+            </div>
+          </div>
           <p>¡Intenta armar el rompecabezas!</p>
-          
-          {/* Componente de arrastrar y soltar */}
-          <DraggableItem />
-          <DropZone />
         </>
       ) : (
         <>
           <h3>¡Felicidades, has armado el rompecabezas!</h3>
-          <button onClick={restartGame}>Reiniciar Juego</button>
+          <button className="restart-button" onClick={restartGame}>
+            Reiniciar Juego
+          </button>
         </>
       )}
 
-      <div style={{ marginTop: '20px' }}>
+      <div className="tutorial-button">
         <button onClick={() => navigate('/')}>Volver al Tutorial</button>
       </div>
     </div>
