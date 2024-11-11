@@ -10,7 +10,7 @@ import Register from './Register';
 import Home from './Home';
 import Navbar from './Navbar';
 import Game from './game';
-import PuzzleGame from './components/PuzzleGame';  
+import PuzzleGame from './puzzleGame';  
 
 function App() {
   return (
@@ -25,8 +25,8 @@ function App() {
                 <Route path='/' element= {<Home />} /> {/*Ruta principal */}
                 <Route path='/Login' element={<Login />} /> {/*Ruta de login*/}
                 <Route path='/Register' element={<Register />} /> {/*Ruta de registro*/}
-                <Route path="/Game" element={<game />} /> {/* Ruta para el juego */}
-                <Route path="/Game" element={<PuzzleGame />} />
+                <Route path="/Game" element={<Game />} /> {/* Ruta para el juego */}
+                <Route path="/PuzzleGame" element={<PuzzleGame />} />
                 {/*Agregar las rutas que necesito*/}
               </Routes> 
             </div>

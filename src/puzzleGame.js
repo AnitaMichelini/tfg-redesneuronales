@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDrag, useDrop } from 'react-dnd';
-import { ItemTypes } from './ItemTypes'; // Definimos los tipos de elementos arrastrables
+import { ItemTypes } from './itemsTypes'; // Definimos los tipos de elementos arrastrables
 
 // Definir las piezas y sus posiciones
 const PuzzlePiece = ({ piece, index, movePiece }) => {
@@ -65,7 +65,7 @@ const PuzzleGame = ({ onGameOver }) => {
 
 // Crear las piezas del rompecabezas
 const createPieces = () => {
-  const image = 'path_to_your_image.jpg'; // Ruta de la imagen que quieres usar
+  const image = 'partesNeuronaJuegoRompecabezas.jpg'; // Ruta de la imagen que quieres usar
   const pieces = [];
   let id = 0;
   for (let y = 0; y < 3; y++) {
