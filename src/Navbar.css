@@ -1,0 +1,17 @@
+.navbar {
+    display: flex;
+    justify-content: center;
+    background-color: #282c34; /* Color del fondo de la barra */
+    padding: 10px; /* Espaciado interno */
+  }
+  
+  .nav-link {
+    color: white; /* Color del texto */
+    text-decoration: none; /* Sin subrayado */
+    margin: 0 15px; /* Espaciado entre enlaces */
+    font-size: 18px; /* Tamaño de fuente */
+  }
+  
+  .nav-link:hover {
+    text-decoration: underline; /* Subrayar al pasar el cursor */
+  }

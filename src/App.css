@@ -1,31 +1,37 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
+/* Fondo oscuro con tonos azules */
 .App-header {
-  background-color: #282c34;
+  background: linear-gradient(135deg, #1c1f2b, #283347);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  color: #e0e6ed;
 }
 
-.App-link {
-  color: #61dafb;
+/* Título con color claro y sombra */
+.App-title {
+  font-size: 3em;
+  font-weight: bold;
+  color: #e0e6ed;
+  text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.7);
+  margin-bottom: 20px;
+}
+
+/* Imagen de la neurona que gira */
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+  border-radius: 50%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
 }
 
 @keyframes App-logo-spin {
@@ -35,4 +41,57 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+/* Estilo del formulario de inicio de sesión */
+.login-form {
+  background-color: #2a3140;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3);
+  width: 300px;
+  text-align: left;
+}
+
+.login-form input {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 5px;
+  border: 1px solid #444c5c;
+  background-color: #1e2430;
+  color: #e0e6ed;
+}
+
+.login-form button {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  background-color: #4b6cb7;
+  color: white;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.login-form button:hover {
+  background-color: #3b579d;
+}
+
+/* Estilos para enlaces de "Recuperar contraseña" y "Registrarme" */
+.login-form .form-links {
+  margin-top: 10px;
+  text-align: center;
+}
+
+.login-form a {
+  color: #4b8cd1;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+.login-form a:hover {
+  color: #69a9e1;
 }
