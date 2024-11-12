@@ -12,6 +12,7 @@ import Navbar from './Navbar';
 import Game from './game';
 import PuzzleGame from './puzzleGame';
 import VideosNinos from './videosNiños';  
+import TutorialesAdolescentes from './tutorialAdolescentes';
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
                 <Route path="/Game" element={<Game />} /> {/* Ruta para el juego */}
                 <Route path="/PuzzleGame" element={<PuzzleGame />} />
                 <Route path='/VideosNiños' element={<VideosNinos />} /> {/*Ruta de login*/}
+                <Route path='/TutorialesAdolescentes' element={<TutorialesAdolescentes />} /> {/*Ruta de login*/}
               </Routes> 
             </div>
         </header>
