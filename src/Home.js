@@ -29,6 +29,9 @@ const Home = () => {
         <h2>Juego de Rompecabezas sobre Redes Neuronales</h2>
         <p>Juega y aprende sobre cómo funcionan las redes neuronales a través de un rompecabezas interactivo.</p>
         <a href="/game" target="_blank" rel="noopener noreferrer">Acceder al Juego</a>
+        <h2>Juego de Conexion Neuronal</h2>
+        <p>Juega y aprende sobre cómo funcionan las conexiones de redes neuronales.</p>
+        <a href="/Neuron" target="_blank" rel="noopener noreferrer">Acceder al Juego</a>
       </section>
 
       {/* Sección de Tutoriales para Adolescentes */}
